@@ -243,6 +243,16 @@ font-size: 25px;
     background-color: #dfe2ed;
 }
 
+.productDetails .btn-circle svg {
+    font-size: 17px;
+    color: #000;
+    opacity: 0.8;
+}
+
+.productDetails.btn-circle:hover {
+    background-color: #ccc;
+    
+}
 
 .productSize {
     width: 100%;
@@ -266,6 +276,10 @@ font-size: 25px;
     color: #000;
     font-size: 14px !important;
     transition: all 0.1s ease-in-out;
+}
+
+.productSize ul li a:hover {
+background: #dfe2ed;
 }
 
 .productSize ul li a.active {

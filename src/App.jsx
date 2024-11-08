@@ -12,7 +12,8 @@ const MyContext = createContext();
 
 function App() {
   const [countryList, setCountryList] = useState([]);
-  const [selectedCountry, setSelectedCountry] = useState(""); // Correct naming here
+  const [selectedCountry, setSelectedCountry] = useState(""); 
+  const [IsHeaderFooterShow, setIsHeaderFooterShow] = useState(true);
 
   useEffect(() => {
     getCountry("https://countriesnow.space/api/v0.1/countries/");
@@ -36,10 +37,16 @@ function App() {
     countryList,
     selectedCountry,
     setSelectedCountry, 
+    IsHeaderFooterShow,  
+    setIsHeaderFooterShow,  
   };
 
   return (
     <MyContext.Provider value={values}>
+      {
+        IsHeaderFooterShow === true && <Header />
+        }
+      
       <Header />
       <CategoryMenu/>
       <main>
