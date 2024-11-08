@@ -193,3 +193,82 @@ opacity: 1;
 .section {
     padding: 45px 150px;
 }
+
+.productDetails .hd {
+font-size: 25px;
+}
+
+.productDetails .oldPrice {
+    font-size: 20px;
+}
+
+.productDetails .netPrice {
+    font-size: 20px;
+}
+
+
+/* .btn-blue:hover {
+    background: #53548c !important;
+} */
+
+.btn-big {
+    font-size: 15px !important;
+    padding: 7px 15px !important;
+    min-width: auto !important;
+    margin-left: 20px !important;
+}
+
+.btn-round {
+    border-radius: 30px !important;
+}
+
+.btn-sml {
+    font-size: 12px !important;
+    color: #000;
+    text-transform: capitalize !important;
+}
+
+.btn-sml svg {
+    font-size: 20px;
+}
+
+.btn-circle {
+    border-radius: 45% !important;
+    
+    
+}
+
+.productDetails .btn-circle  {
+    color: #000 !important;
+    background-color: #dfe2ed;
+}
+
+
+.productSize {
+    width: 100%;
+    height: auto;
+    padding: 25px 0px;
+}
+
+.productSize ul {
+    margin-right: 10px !important;
+}
+
+.productSize ul li a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 5px 10px !important;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 5px !important;
+    cursor: pointer;
+    text-decoration: none !important;
+    color: #000;
+    font-size: 14px !important;
+    transition: all 0.1s ease-in-out;
+}
+
+.productSize ul li a.active {
+    background: #1E40AF !important;
+    color: #fff !important;
+}
