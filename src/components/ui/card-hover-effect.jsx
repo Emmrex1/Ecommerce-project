@@ -1,14 +1,14 @@
-import { cn } from "@/lib/utils"; 
+import { cn } from "@/lib/utils";
 import { AnimatePresence, motion } from "framer-motion";
 import { useState } from "react";
 
-export const HoverEffect = ({ items, className }) => {
+export const HoverEffect = ({ items, openModal, className }) => {
   const [hoveredIndex, setHoveredIndex] = useState(null);
 
   return (
     <div
       className={cn(
-        "grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-6 py-10",
+        "grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-6 py-6",
         className
       )}
     >
@@ -18,13 +18,17 @@ export const HoverEffect = ({ items, className }) => {
           className="relative group block p-4 border rounded-lg shadow-lg hover:shadow-xl"
           onMouseEnter={() => setHoveredIndex(idx)}
           onMouseLeave={() => setHoveredIndex(null)}
+          transition="transform 0.3s ease"
+          style={{
+            transform: hoveredIndex === idx? "scale(1.05)" : "scale(1)",
+          }}
+          onClick={() => openModal(item)}
         >
           {item.discount && (
             <span className="absolute top-2 left-2 bg-blue-500 text-white text-xs font-semibold px-2 py-1 rounded">
               {item.discount}
             </span>
           )}
-
           {item.organic && (
             <span className="absolute top-2 right-2 bg-green-500 text-white text-xs font-semibold px-2 py-1 rounded">
               ORGANIC
@@ -37,16 +41,14 @@ export const HoverEffect = ({ items, className }) => {
           )}
 
           <div className="aspect-w-1 aspect-h-1 bg-gray-200 rounded-lg mb-4">
-            <div className="aspect-w-1 aspect-h-1 bg-gray-200 rounded-lg mb-4 overflow-hidden">
-              <img
-                src={item.image}
-                alt={item.title}
-                className="object-cover w-full h-full"
-              />
-            </div>
+            <img
+              src={item.image}
+              alt={item.title}
+              className="object-cover w-full h-full"
+            />
           </div>
 
-          <h4 className="text-lg font-semibold">{item.title}</h4>
+          <h4 className="text-sm font-medium">{item.title}</h4>
           <p className="text-green-600 font-medium">{item.description}</p>
 
           <div className="flex items-center space-x-1 mt-2">
@@ -73,16 +75,12 @@ export const HoverEffect = ({ items, className }) => {
           </div>
 
           <AnimatePresence>
-            {hoveredIndex === idx && (
-              <motion.button
-                className="w-full mt-4 bg-blue-600 text-white py-2 rounded-md font-medium"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-              >
-                {item.buttonText}
-              </motion.button>
-            )}
+            <button
+              onClick={() => openModal(item)}
+              className="w-full py-2 border border-blue-500 text-blue-500 rounded-full font-semibold hover:bg-blue-500 hover:text-white transition"
+            >
+              {item.buttonText}
+            </button>
           </AnimatePresence>
         </div>
       ))}

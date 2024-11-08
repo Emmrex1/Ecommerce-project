@@ -22,6 +22,7 @@ const Homepage = () => {
       <NewsletterSubscription />
       <Features />
       <MenuCategories />
+    
     </>
   );
 };

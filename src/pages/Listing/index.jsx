@@ -13,12 +13,15 @@ import ProductDetail from "../ProductDetail";
 import { ProductCarousel } from "@/myComponents/Carousel/ProductCarousel";
 import Pagination from "@mui/material/Pagination";
 import Stack from "@mui/material/Stack";
+import { View } from "lucide-react";
+import { ProductView } from "@/myComponents/ProductView";
+
 
 
 
 const Listing = () => {
-
    const [anchorEl, setAnchorEl] = useState(null);
+   const [productView, setProductView] = useState('four');
   const openDropdown = Boolean(anchorEl);
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -41,21 +44,14 @@ const Listing = () => {
 
               <div className="showBy mt-3 mb-3 d-flex align-items-center">
                 <div className="d-flex align-item-center btnWrapper">
-                  <button>
-                    <IoMdMenu />
-                  </button>
-                  <button>
-                    <BiGridAlt />
-                  </button>
-                  <button>
-                    <PiDotsNineFill />
-                  </button>
-                  <button>
-                    <CgMenuGridR />
-                  </button>
+                  <button className= {productView==='one' && 'ViewOneItemPerview'} onClick={()=> setProductView('one')}><IoMdMenu /></button>
+                  <button  className= {productView==='two' && 'ViewTwoItemPerview'} onClick={()=> setProductView('two')}> <BiGridAlt/></button>
+                  <button  className= {productView==='three' && 'ViewThreeItemPerview'} onClick={()=> setProductView('three')}> <PiDotsNineFill/> </button>
+                  <button  className= {productView==='four' && 'ViewFourItemPerview'} onClick={()=> setProductView('four')}> <CgMenuGridR /></button>
                 </div>
+                
                 <div className="ml-auto showByFilter">
-                  <Button onClick={handleClick}>
+                  <Button className= {productView==='three' && 'ViewThreeItemPerview'} onClick={handleClick}>
                     Shop 9<FaAngleDown />
                   </Button>
                   <Menu
@@ -79,7 +75,7 @@ const Listing = () => {
               </div>
 
               <div className="productListing">
-                <ProductCarousel />
+                <ProductView/>
               </div>
               <div className="d-flex align-item-center justify-content-center mt-20 ml-auto">
                 <Pagination count={10} color="primary" size="large"/>

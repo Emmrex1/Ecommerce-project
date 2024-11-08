@@ -7,6 +7,7 @@ import Homepage from "@/pages/Homepage";
 import ProductDetail from "@/pages/ProductDetail";
 import { createBrowserRouter } from "react-router-dom";
 import Listing from "@/pages/Listing";
+import ProductDetails from "@/myComponents/ProductList";
 
 export const router = createBrowserRouter([
   {
@@ -17,23 +18,28 @@ export const router = createBrowserRouter([
         path: "/",
         element: <Homepage />,
       },
-      {
-        path: "/product/:productId",
-        element: <ProductDetail />,
-      },
-      {
-        path: "/products",
-        element: <ProductList />,
-      },
+      //  {
+      //    path: "/product/:productId",
+      //    element: <ProductDetail />,
+      //  },
+      // {
+      //   path: "/products",
+      //   element: <ProductList />,
+      // },
 
-      {
-        path: "/product",
-        element: <ProductModal />,
-      },
+      // {
+      //   path: "/product",
+      //   element: <ProductModal />,
+      // },
 
       {
         path: "cat/:id",
-        element: <Listing/>,
+        element: <Listing />,
+      },
+
+      {
+        path: "product/:id",
+        element: <ProductDetails />,
       },
 
       {
