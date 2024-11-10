@@ -43,7 +43,7 @@ function CategoryMenu() {
         "Alcoholic Beverages",
       ],
     },
-    // Add other menu items here if needed
+    
   ];
 
   return (

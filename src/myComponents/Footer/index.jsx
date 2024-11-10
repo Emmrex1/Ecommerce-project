@@ -5,9 +5,9 @@ export function Footer() {
   return (
     <footer className="bg-gray-100 py-8">
       <div className="container mx-auto px-4">
-        {/* Top Section */}
+        
         <div className="flex flex-col lg:flex-row justify-between items-center border-b border-gray-300 pb-4 mb-4">
-          {/* Contact Section */}
+      
           <div className="flex items-center space-x-4 mb-4 lg:mb-0">
             <div className="flex items-center justify-center bg-white rounded-full h-10 w-10">
               <FaPhone className="text-gray-500" />
@@ -18,14 +18,14 @@ export function Footer() {
             </div>
           </div>
 
-          {/* App Download Links */}
+          
           <div className="flex items-center space-x-4 mb-4 lg:mb-0">
             <span className="text-gray-500">Download App on Mobile:</span>
             <FaGooglePlay className="text-4xl text-gray-700 hover:text-gray-800" />
             <FaApple className="text-4xl text-gray-700 hover:text-gray-800" />
           </div>
 
-          {/* Social Media Icons */}
+          
           <div className="flex space-x-4">
             <a href="#" className="text-gray-500 hover:text-gray-700">
               <FaFacebookF />
@@ -39,15 +39,15 @@ export function Footer() {
           </div>
         </div>
 
-        {/* Bottom Section */}
+    
         <div className="flex flex-col lg:flex-row items-center justify-between text-gray-500 text-sm space-y-4 lg:space-y-0">
-          {/* Copyright */}
+          
           <p className="lg:mr-4 text-center lg:text-left">
             Copyright 2024 © Bacola WordPress Theme. All rights reserved.
             Powered by KlbTheme.
           </p>
 
-          {/* Links */}
+        
           <div className="flex space-x-4 mb-4 lg:mb-0">
             <a href="#" className="hover:underline">
               Privacy Policy
@@ -60,7 +60,7 @@ export function Footer() {
             </a>
           </div>
 
-          {/* Payment Methods */}
+          
           <div className="flex justify-center space-x-4 mt-4 lg:mt-0">
             <img
               src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQFFslIgsEbLh7sgBP96LbZrmEfAgMd3WQkBA&s"

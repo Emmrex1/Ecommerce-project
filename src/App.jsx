@@ -1,7 +1,6 @@
 import { createContext, useEffect, useState } from "react";
 import "./App.css";
-import "bootstrap/dist/css/bootstrap.min.css";
-
+// import "bootstrap/dist/css/bootstrap.min.css";
 import Header from "./myComponents/header";
 import { Footer } from "./myComponents/Footer";
 import { Outlet } from "react-router-dom";
@@ -12,8 +11,9 @@ const MyContext = createContext();
 
 function App() {
   const [countryList, setCountryList] = useState([]);
-  const [selectedCountry, setSelectedCountry] = useState(""); 
+  const [selectedCountry, setSelectedCountry] = useState("");
   const [IsHeaderFooterShow, setIsHeaderFooterShow] = useState(true);
+  const [IsLogin, setIsLogin] = useState(false);
 
   useEffect(() => {
     getCountry("https://countriesnow.space/api/v0.1/countries/");
@@ -36,23 +36,22 @@ function App() {
   const values = {
     countryList,
     selectedCountry,
-    setSelectedCountry, 
-    IsHeaderFooterShow,  
-    setIsHeaderFooterShow,  
+    setSelectedCountry,
+    IsHeaderFooterShow,
+    setIsHeaderFooterShow,
+    IsLogin,
+    setIsLogin,
+    
   };
 
   return (
     <MyContext.Provider value={values}>
-      {
-        IsHeaderFooterShow === true && <Header />
-        }
-      
-      <Header />
-      <CategoryMenu/>
+      {IsHeaderFooterShow && <Header />}
+      {IsHeaderFooterShow && <CategoryMenu />}
       <main>
         <Outlet />
       </main>
-      <Footer />
+      {IsHeaderFooterShow && <Footer />}
     </MyContext.Provider>
   );
 }
