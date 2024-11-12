@@ -27,7 +27,7 @@ const SignInPage = () => {
               htmlFor="email"
               className="block text-gray-700 font-medium mb-1"
             >
-              Email *
+              Email 
             </label>
             <input
               type="email"
@@ -41,7 +41,7 @@ const SignInPage = () => {
               htmlFor="password"
               className="block text-gray-700 font-medium mb-1"
             >
-              Password *
+              Password 
             </label>
             <input
               type="password"
@@ -58,23 +58,27 @@ const SignInPage = () => {
           <div className="flex gap-4">
             <button
               type="submit"
-              className="w-100 bg-blue-600 text-white py-2 rounded-md font-semibold hover:bg-blue-700 transition duration-300"
+              className="w-full bg-blue-600 text-white py-2 rounded-md font-semibold hover:bg-blue-700 transition duration-300"
             >
               Sign In
             </button>
-            <Link to="/"><button
-              type="button"
-              className="w-full border border-gray-300 text-gray-700 py-2 px-5 rounded-md font-semibold hover:bg-gray-100 transition duration-300"
-              onClick={() => context.setIsHeaderFooterShow(false)}
-            >
-              Cancel
-            </button>
+            <Link to="/">
+              <button
+                type="button"
+                className="w-full border border-gray-300 text-gray-700 px-14 py-2 rounded-md font-semibold hover:bg-gray-100 transition duration-300"
+                onClick={() => context.setIsHeaderFooterShow(false)}
+              >
+                Cancel
+              </button>
             </Link>
           </div>
         </form>
         <p className="text-center text-sm text-gray-600 mt-4">
           Not Registered?
-          <a href="/signup" className="text-blue-600 font-semibold hover:underline">
+          <a
+            href="/signup"
+            className="text-blue-600 font-semibold hover:underline"
+          >
             Sign Up
           </a>
         </p>

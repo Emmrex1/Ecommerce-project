@@ -7,9 +7,22 @@ const CartPage = () => {
       name: "Field Roast Chao Cheese Creamy Original",
       price: 7.25,
       quantity: 1,
-      image: "https://via.placeholder.com/50", 
+      image: "https://via.placeholder.com/50",
     },
-    
+    {
+      id: 2,
+      name: "Field Roast Chao Cheese Creamy Original",
+      price: 7.25,
+      quantity: 1,
+      image: "https://via.placeholder.com/50",
+    },
+    {
+      id: 3,
+      name: "Field Roast Chao Cheese Creamy Original",
+      price: 7.25,
+      quantity: 1,
+      image: "https://via.placeholder.com/50",
+    },
   ]);
 
   const handleQuantityChange = (id, delta) => {
@@ -66,14 +79,14 @@ const CartPage = () => {
                   <td className="p-3 text-center flex items-center justify-center gap-2">
                     <button
                       onClick={() => handleQuantityChange(item.id, -1)}
-                      className="px-2 py-1 bg-gray-200 rounded-l"
+                      className="px-3 py-1 bg-gray-200 rounded-l"
                     >
                       -
                     </button>
                     <span className="px-3">{item.quantity}</span>
                     <button
                       onClick={() => handleQuantityChange(item.id, 1)}
-                      className="px-2 py-1 bg-gray-200 rounded-r"
+                      className="px-3 py-1 bg-gray-200 rounded-r"
                     >
                       +
                     </button>
