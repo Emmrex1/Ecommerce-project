@@ -1,13 +1,12 @@
-
 import { ProductModal } from "@/myComponents/ProductModal";
 import App from "../App";
-import ProductList from "@/myComponents/ProductList";
+import ProductList from "@/pages/ProductDetails";
 import NotFoundPage from "@/pages/ErrorPage";
 import Homepage from "@/pages/Homepage";
-import ProductDetail from "@/pages/ProductDetail";
+import ProductDetail from "@/myComponents/ProductDetail";
 import { createBrowserRouter } from "react-router-dom";
 import Listing from "@/pages/Listing";
-import ProductDetails from "@/myComponents/ProductList";
+import ProductDetails from "@/pages/ProductDetails";
 import CartPage from "@/pages/CartPage";
 import SignUpPage from "@/pages/Auth/SignUp";
 import SignInPage from "@/pages/Auth/SignIn";
@@ -21,19 +20,6 @@ export const router = createBrowserRouter([
         path: "/",
         element: <Homepage />,
       },
-      //  {
-      //    path: "/product/:productId",
-      //    element: <ProductDetail />,
-      //  },
-      // {
-      //   path: "/products",
-      //   element: <ProductList />,
-      // },
-
-      // {
-      //   path: "/product",
-      //   element: <ProductModal />,
-      // },
 
       {
         path: "cat/:id",
@@ -46,13 +32,18 @@ export const router = createBrowserRouter([
       },
 
       {
+        path: "/products",
+        element: <ProductDetail />,
+      },
+
+      {
         path: "cart",
         element: <CartPage />,
       },
 
       {
         path: "signin",
-        element: <SignInPage/>,
+        element: <SignInPage />,
       },
 
       {

@@ -288,3 +288,27 @@ background: #dfe2ed;
 }
 
 
+
+/* Apply smooth transition when hovering over the product card */
+.product-card {
+    transition: all 0.3s ease;
+}
+
+/* Scale up the card and add a shadow on hover */
+.product-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0px 10px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Style for Swiper Navigation Arrows */
+.swiper-button-next,
+.swiper-button-prev {
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+/* Apply a subtle hover effect on arrows */
+.swiper-button-next:hover,
+.swiper-button-prev:hover {
+    transform: scale(1.2);
+    opacity: 0.8;
+}

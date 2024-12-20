@@ -1,28 +1,22 @@
-
-import { ProductCarousel } from "@/myComponents/Carousel/ProductCarousel";
 import SwiperSlide from "@/myComponents/Carousel/Swiper";
-import CategoryGrid from "@/myComponents/Category/CategoryGrid";
 import { Features } from "@/myComponents/Features";
-import MarketplaceLayout from "@/myComponents/MainComponentLayout";
-import MenuCategories from "@/myComponents/MenuCategories";
-import { CardHoverEffectDemo } from "@/myComponents/NewProducts";
 import { NewsletterSubscription } from "@/myComponents/Newsletter";
 import { WeeklySpecial } from "@/myComponents/WeeklySpecial";
+import MainPage from "../../SubPages/MainPage";
+import MainPage2 from "../../SubPages/MainPage2";
+import MainPage1 from "../../SubPages/MainPage1/Mainpage1";
+import Headerrr from "@/Layout/Header";
 
 const Homepage = () => {
   return (
     <>
-     
       <SwiperSlide />
-      <ProductCarousel />
+      <MainPage />
       <WeeklySpecial />
-      <CardHoverEffectDemo />
-      <MarketplaceLayout />
-      <CategoryGrid />
+      <MainPage1 />
+      <MainPage2 />
       <NewsletterSubscription />
       <Features />
-      <MenuCategories />
-    
     </>
   );
 };

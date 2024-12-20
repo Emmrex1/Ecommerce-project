@@ -33,7 +33,7 @@ export function ProductView() {
 
 export const projects = [
   {
-    title: "Blueberries – 1 Pint Package",
+    title: "Blueberriesxxx – 1 Pint Package",
     description: "In Stock",
     discount: "23%",
     recommended: true,

@@ -1,15 +1,14 @@
-
 import React, { useState } from "react";
-import ProductZoom from "../ProductZoom";
+import ProductZoom from "../../myComponents/ProductZoom";
 import Rating from "@mui/material/Rating";
-import QuantityBox from "../QuantityBox";
+import QuantityBox from "../../myComponents/QuantityBox";
 import Button from "@mui/material/Button";
 import { BsCart4 } from "react-icons/bs";
 import { FaRegHeart } from "react-icons/fa";
 import { MdOutlineCompareArrows } from "react-icons/md";
 import Tooltip from "@mui/material/Tooltip";
-import ProductTabs from "../ProductTabs";
-import RelatedProduct from "../ProductTabs/RelatedProducts";
+import ProductTabs from "../../myComponents/ProductTabs";
+import RelatedProduct from "../../myComponents/ProductTabs/RelatedProducts";
 
 const ProductDetails = () => {
   const [activeSize, setActiveSize] = useState(null);
@@ -128,9 +127,3 @@ const ProductDetails = () => {
 };
 
 export default ProductDetails;
-;
-
-
-
-
-

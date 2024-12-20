@@ -1,11 +1,12 @@
 import { createContext, useEffect, useState } from "react";
 import "./App.css";
-// import "bootstrap/dist/css/bootstrap.min.css";
-import Header from "./myComponents/header";
-import { Footer } from "./myComponents/Footer";
+import { Footer } from "./Layout/Footer";
 import { Outlet } from "react-router-dom";
 import axios from "axios";
 import CategoryMenu from "./myComponents/All Categories/categ";
+import Headerrr from "./Layout/Header";
+import TopBar from "./Layout/TopBar";
+import TopNav from "./Layout/TopNav";
 
 const MyContext = createContext();
 
@@ -41,12 +42,14 @@ function App() {
     setIsHeaderFooterShow,
     IsLogin,
     setIsLogin,
-    
   };
 
   return (
     <MyContext.Provider value={values}>
-      {IsHeaderFooterShow && <Header />}
+      <TopBar />
+      <TopNav />
+
+      {IsHeaderFooterShow && <Headerrr />}
       {IsHeaderFooterShow && <CategoryMenu />}
       <main>
         <Outlet />
