@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import ReviewSection from "./Reviews";
-import SpecificationsTable from "./SpecificationsTable";
+import ReviewSection from "../Reviews";
+import SpecificationsTable from "../SpecificationsTable";
 
 const ProductTabs = () => {
   const [activeTab, setActiveTab] = useState("description");
@@ -57,7 +57,7 @@ const ProductTabs = () => {
               Additional Information
             </h3>
 
-            <SpecificationsTable/>
+            <SpecificationsTable />
           </div>
         )}
         {activeTab === "vendor" && (

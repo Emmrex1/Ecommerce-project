@@ -3,13 +3,14 @@ import App from "../App";
 import ProductList from "@/pages/ProductDetails";
 import NotFoundPage from "@/pages/ErrorPage";
 import Homepage from "@/pages/Homepage";
-import ProductDetail from "@/myComponents/ProductDetail";
 import { createBrowserRouter } from "react-router-dom";
 import Listing from "@/pages/Listing";
-import ProductDetails from "@/pages/ProductDetails";
 import CartPage from "@/pages/CartPage";
 import SignUpPage from "@/pages/Auth/SignUp";
 import SignInPage from "@/pages/Auth/SignIn";
+import ProductsDetails from "@/pages/ProductDetails";
+import Layout from "@/myComponents/layout";
+import ProductPage from "@/myComponents/ProductPage/ProductPage";
 
 export const router = createBrowserRouter([
   {
@@ -22,18 +23,18 @@ export const router = createBrowserRouter([
       },
 
       {
-        path: "cat/:id",
+        path: "subcat/:id",
         element: <Listing />,
       },
 
       {
         path: "product/:id",
-        element: <ProductDetails />,
+        element: <ProductsDetails />,
       },
 
       {
-        path: "/products",
-        element: <ProductDetail />,
+        path: "productz",
+        element: <ProductPage />,
       },
 
       {
@@ -49,6 +50,10 @@ export const router = createBrowserRouter([
       {
         path: "signup",
         element: <SignUpPage />,
+      },
+      {
+        path: "layout",
+        element: <Layout />,
       },
 
       {

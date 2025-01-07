@@ -2,10 +2,10 @@ import SwiperSlide from "@/myComponents/Carousel/Swiper";
 import { Features } from "@/myComponents/Features";
 import { NewsletterSubscription } from "@/myComponents/Newsletter";
 import { WeeklySpecial } from "@/myComponents/WeeklySpecial";
-import MainPage from "../../SubPages/MainPage";
-import MainPage2 from "../../SubPages/MainPage2";
-import MainPage1 from "../../SubPages/MainPage1/Mainpage1";
+import MainPage from "../../myComponents/FeaturedProduct/MainPage";
+ import MainPage1 from "../../myComponents/New Product/MainPage1/Mainpage1";
 import Headerrr from "@/Layout/Header";
+import OtherProducts from "@/myComponents/OtherProducts";
 
 const Homepage = () => {
   return (
@@ -13,8 +13,8 @@ const Homepage = () => {
       <SwiperSlide />
       <MainPage />
       <WeeklySpecial />
-      <MainPage1 />
-      <MainPage2 />
+       <MainPage1 /> 
+      <OtherProducts />
       <NewsletterSubscription />
       <Features />
     </>

@@ -1,124 +1,86 @@
 import React, { useState } from "react";
-import {
-  Home,
-  ShoppingCart,
-  LocalDining,
-  Cake,
-  LocalCafe,
-  Menu,
-  ExpandMore,
-  Close,
-} from "@mui/icons-material";
+import { Link } from "react-router-dom"; // Import Link for navigation
 
-function CategoryMenu() {
-  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-  const [activeMenu, setActiveMenu] = useState(null);
+const CategoryMenu = () => {
+  const [showCategories, setShowCategories] = useState(false);
 
-  const toggleSidebar = () => {
-    setIsSidebarOpen(!isSidebarOpen);
+  const handleCategoriesToggle = () => {
+    setShowCategories((prev) => !prev);
   };
 
-  const menuItems = [
-    {
-      name: "Fruits & Vegetables",
-      icon: "📐",
-      subItems: [
-        "Cuts & Sprouts",
-        "Exotic Fruits & Veggies",
-        "Fresh Fruits",
-        "Fresh Vegetables",
-        "Herbs & Seasonings",
-        "Packaged Produce",
-        "Party Trays",
-      ],
-    },
-    {
-      name: "Beverages",
-      icon: "💼",
-      subItems: [
-        "Soft Drinks",
-        "Juices",
-        "Energy Drinks",
-        "Tea & Coffee",
-        "Alcoholic Beverages",
-      ],
-    },
-    
+  const subcategories = [
+    { id: 1, name: "ELECTRONICS" },
+    { id: 2, name: "CLOTHING" },
+    { id: 3, name: "HOME APPLIANCE" },
+    { id: 4, name: "BOOKS" },
+    { id: 5, name: "SPORTS" },
+    { id: 6, name: "BLOG" },
+
   ];
 
   return (
-    <div className="relative">
-      <div className="flex-grow p-4 lg:ml-20">
-        <nav className="flex flex-wrap items-center space-x-4 lg:space-x-10 text-gray-600">
-          <button
-            className="flex items-center mx-20 gap-2 p-2 text-white bg-blue-500 rounded-full"
-            onClick={toggleSidebar}
+    <nav className="relative flex px-4 py-4 bg-white shadow-md">
+      {/* Left Section: ALL CATEGORIES */}
+      <div className="relative inline-block mx-8">
+        <button
+          onClick={handleCategoriesToggle}
+          className="flex items-center gap-2 px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 focus:outline-none"
+        >
+          <span>ALL CATEGORIES</span>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="h-4 w-4"
+            viewBox="0 0 20 20"
+            fill="currentColor"
           >
-            <Menu />
-            <span>All Categories</span>
-            <ExpandMore />
-          </button>
+            <path
+              fillRule="evenodd"
+              d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+              clipRule="evenodd"
+            />
+          </svg>
+        </button>
 
-          <div className="hidden lg:flex space-x-4 lg:space-x-10">
-            <a
-              href="#"
-              className="flex items-center text-blue-500 font-semibold"
-            >
-              HOME <ExpandMore className="ml-1" />
-            </a>
-            <a href="#" className="flex items-center">
-              SHOP <ExpandMore className="ml-1" />
-            </a>
-            <a href="#" className="flex items-center">
-              <LocalDining className="mr-1" /> MEATS & SEAFOOD
-            </a>
-            <a href="#" className="flex items-center">
-              <Cake className="mr-1" /> BAKERY
-            </a>
-            <a href="#" className="flex items-center">
-              <LocalCafe className="mr-1" /> BEVERAGES
-            </a>
-            <a href="#" className="flex items-center">
-              BLOG
-            </a>
-            <a href="#" className="flex items-center">
-              CONTACT
-            </a>
+        {/* Dropdown Menu */}
+        {showCategories && (
+          <div className="absolute left-0 mt-2 bg-white border rounded-lg shadow-lg w-48 z-10">
+            <ul className="py-2">
+              {subcategories.map((subcategory) => (
+                <li
+                  key={subcategory.id}
+                  className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
+                >
+                  <Link
+                    to={`/subcat/${subcategory.name.toLowerCase()}`}
+                    className="text-gray-700 hover:text-purple-600"
+                  >
+                    {subcategory.name}
+                  </Link>
+                </li>
+              ))}
+            </ul>
           </div>
-        </nav>
+        )}
       </div>
 
-      {isSidebarOpen && (
-        <div className="absolute left-4 top-20 z-10 w-48 p-4 bg-white shadow-md rounded-md">
-          <div className="flex justify-between items-center">
-            <h3 className="text-gray-700">Projects</h3>
-            <Close className="cursor-pointer" onClick={toggleSidebar} />
-          </div>
-          <ul className="mt-4 space-y-3 text-gray-600">
-            {menuItems.map((item, index) => (
-              <li
-                key={index}
-                className="relative flex items-center gap-2 cursor-pointer"
-                onMouseEnter={() => setActiveMenu(index)}
-                onMouseLeave={() => setActiveMenu(null)}
-              >
-                <span>{item.icon}</span> {item.name}
-                {activeMenu === index && (
-                  <div className="absolute left-full top-0 ml-2 w-48 p-4 bg-white shadow-lg rounded-md">
-                    <ul className="space-y-2 text-gray-700">
-                      {item.subItems.map((subItem, subIndex) => (
-                        <li key={subIndex}>{subItem}</li>
-                      ))}
-                    </ul>
-                  </div>
-                )}
-              </li>
-            ))}
-          </ul>
-        </div>
-      )}
-    </div>
+      {/* Right Section: Navigation Links */}
+      <ul className="hidden md:flex mx-auto items-center gap-10 text-sm font-medium text-gray-700">
+        {subcategories.map((subcategory) => (
+          <li
+            key={subcategory.id}
+            className="hover:text-purple-600 cursor-pointer"
+          >
+            <Link
+              to={`/subcat/${subcategory.name.toLowerCase()}`}
+              className="text-gray-700 hover:text-purple-600"
+            >
+              {subcategory.name}
+            </Link>
+          </li>
+        ))}
+      </ul>
+    </nav>
   );
-}
+};
 
 export default CategoryMenu;

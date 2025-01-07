@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import Layout from "../../myComponents/FeaturedProduct";
+import Layout from "..";
 import axios from "axios";
 
 const MainPage = () => {

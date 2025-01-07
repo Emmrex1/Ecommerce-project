@@ -3,7 +3,7 @@ import "./App.css";
 import { Footer } from "./Layout/Footer";
 import { Outlet } from "react-router-dom";
 import axios from "axios";
-import CategoryMenu from "./myComponents/All Categories/categ";
+ import CategoryMenu from "./myComponents/All Categories/categ";
 import Headerrr from "./Layout/Header";
 import TopBar from "./Layout/TopBar";
 import TopNav from "./Layout/TopNav";
@@ -50,7 +50,7 @@ function App() {
       <TopNav />
 
       {IsHeaderFooterShow && <Headerrr />}
-      {IsHeaderFooterShow && <CategoryMenu />}
+       {IsHeaderFooterShow && <CategoryMenu />} 
       <main>
         <Outlet />
       </main>

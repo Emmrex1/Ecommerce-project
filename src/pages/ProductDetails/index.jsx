@@ -1,129 +1,233 @@
-import React, { useState } from "react";
-import ProductZoom from "../../myComponents/ProductZoom";
-import Rating from "@mui/material/Rating";
-import QuantityBox from "../../myComponents/QuantityBox";
-import Button from "@mui/material/Button";
-import { BsCart4 } from "react-icons/bs";
-import { FaRegHeart } from "react-icons/fa";
-import { MdOutlineCompareArrows } from "react-icons/md";
-import Tooltip from "@mui/material/Tooltip";
-import ProductTabs from "../../myComponents/ProductTabs";
-import RelatedProduct from "../../myComponents/ProductTabs/RelatedProducts";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import { useParams } from "react-router-dom";
+import ProductTabs from "@/pages/ProductDetails/ProductTabs";
+import RelatedProducts from "./RelatedProducts";
+import RecentlyViewed from "./RecentlyViewed";
+import { addRecentlyViewed } from "@/utils/addRecentlyViewed";
+import { FiHeart, FiShoppingCart } from "react-icons/fi";
 
-const ProductDetails = () => {
-  const [activeSize, setActiveSize] = useState(null);
+const ProductsDetails = () => {
+  const { id } = useParams();
+  const [product, setProduct] = useState(null);
+  const [relatedProducts, setRelatedProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [quantity, setQuantity] = useState(1);
+  const [currentImage, setCurrentImage] = useState(null);
+  const [wishlist, setWishlist] = useState([]);
+  const [selectedSize, setSelectedSize] = useState(null);
+  const [selectedWeight, setSelectedWeight] = useState(null);
 
-  const handleSizeClick = (index) => {
-    setActiveSize(index);
+  useEffect(() => {
+    const fetchProductDetails = async () => {
+      try {
+        const response = await axios.get(
+          `http://localhost:4000/api/products/${id}`
+        );
+        setProduct(response.data.product);
+
+        const relatedResponse = await axios.get(
+          `http://localhost:4000/api/products/related?subCategory=${response.data.product.subCategory}`
+        );
+        setRelatedProducts(relatedResponse.data.products);
+
+        addRecentlyViewed(response.data.product);
+      } catch (err) {
+        setError("Error fetching product details");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchProductDetails();
+  }, [id]);
+
+  const handleThumbnailClick = (thumbnail) => setCurrentImage(thumbnail);
+
+  const handleQuantityChange = (type) => {
+    setQuantity((prev) => {
+      if (type === "increment") return prev + 1;
+      if (type === "decrement" && prev > 1) return prev - 1;
+      return prev;
+    });
   };
 
+  const toggleWishlist = () => {
+    setWishlist((prev) =>
+      prev.includes(product.id)
+        ? prev.filter((itemId) => itemId !== product.id)
+        : [...prev, product.id]
+    );
+  };
+
+  const handleAddToCart = () => {
+    alert(`Added ${quantity} ${product.name}(s) to the cart!`);
+  };
+
+  const handleSizeChange = (size) => setSelectedSize(size);
+
+  const handleWeightChange = (weight) => setSelectedWeight(weight);
+
+  if (loading)
+    return <p className="text-xl font-semibold text-gray-600">Loading...</p>;
+  if (error) return <p className="text-red-600">{error}</p>;
+
   return (
-    <section className="productDetails py-10">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex flex-col md:flex-row gap-6">
-          <div className="w-full md:w-1/3">
-            <ProductZoom />
+    <div className="container mx-auto px-4 py-8">
+      <div className="flex flex-col lg:flex-row gap-8">
+        {/* Product Images */}
+        <div className="flex flex-col items-center lg:w-1/3 space-y-4">
+          <img
+            src={currentImage || product.images[0]}
+            alt={product.name}
+            className="w-full h-96 object-cover rounded-xl shadow-lg hover:scale-105 transition-transform"
+          />
+          <div className="flex space-x-2">
+            {product.images.map((thumb, index) => (
+              <img
+                key={index}
+                src={thumb}
+                alt={`Thumbnail ${index + 1}`}
+                className={`w-20 h-20 object-cover rounded-lg border-2 cursor-pointer ${
+                  currentImage === thumb
+                    ? "border-blue-600"
+                    : "border-transparent"
+                }`}
+                onClick={() => handleThumbnailClick(thumb)}
+              />
+            ))}
+          </div>
+        </div>
+
+        {/* Product Details */}
+        <div className="lg:w-2/3 space-y-6">
+          <h1 className="text-3xl font-semibold">{product.name}</h1>
+          <p className="text-lg text-gray-600">Brand: {product.brand}</p>
+          <div className="flex items-center space-x-1 mt-2">
+            {Array.from({ length: 5 }, (_, index) => (
+              <svg
+                key={index}
+                xmlns="http://www.w3.org/2000/svg"
+                fill={index < product.rating ? "currentColor" : "none"}
+                viewBox="0 0 20 20"
+                className="h-5 w-5 text-yellow-400"
+              >
+                <path d="M10 15l-3.09 1.636.586-3.904-2.86-2.785 3.91-.34L10 5l1.453 4.566 3.91.34-2.86 2.785.586 3.904L10 15z" />
+              </svg>
+            ))}
+            <p className="text-sm text-gray-500">({product.rating} reviews)</p>
           </div>
 
-          <div className="w-full md:w-2/3 space-y-4">
-            <h2 className="text-2xl md:text-3xl font-bold mb-2">
-              All Natural Italian-Style Chicken Meatballs
-            </h2>
+          <p className="text-sm text-gray-600">Category: {product.category}</p>
 
-            <ul className="space-y-2 text-gray-700">
-              <li className="flex items-center">
-                <span className="font-semibold mr-2">Brands:</span>
-                <span>Welch's</span>
-              </li>
-              <li className="flex items-center">
-                <Rating
-                  name="read-only"
-                  value={4.5}
-                  precision={0.5}
-                  readOnly
-                  size="small"
-                />
-                <span className="text-slate-400 ml-2 cursor-pointer">
-                  1 Review
-                </span>
-              </li>
-              <li className="flex items-center">
-                <span className="font-semibold mr-2">SKU:</span>
-                <span>Welch's</span>
-              </li>
-            </ul>
+          <p className="text-sm text-gray-600">
+            {product.description.substring(0, 100)}...
+          </p>
+          <div className="flex items-center mt-4">
+            <p className="text-2xl font-bold text-red-600">${product.price}</p>
+            {product.oldPrice && (
+              <p className="line-through text-gray-500 ml-4">
+                ${product.oldPrice}
+              </p>
+            )}
+          </div>
+          <p
+            className={`mt-2 text-sm ${
+              product.countInStock > 0 ? "text-green-600" : "text-red-600"
+            }`}
+          >
+            {product.countInStock > 0 ? "In Stock" : "Out of Stock"}
+          </p>
 
-            <div className="flex items-center text-red-500 mt-3 space-x-2">
-              <span className="line-through text-gray-400">$20.00</span>
-              <span className="font-bold text-xl">$15.00</span>
-            </div>
-            <span className="inline-block bg-green-600 text-white py-1 px-3 rounded mt-2">
-              IN STOCK
-            </span>
-
-            <p className="text-gray-700 mt-4 leading-relaxed text-sm md:text-base">
-              All Natural Italian-style Chicken Meatballs are made with
-              high-quality ingredients and are prepared with fresh, unsalted
-              chicken breasts.
-            </p>
-
-            {/* Size Selection */}
-            <div className="flex items-center mt-4 flex-wrap">
-              <span className="font-semibold mr-4">Size / Weight:</span>
-              <ul className="flex flex-wrap gap-2">
-                {["50g", "100g", "200g", "300g", "500g"].map((size, index) => (
-                  <li key={index}>
-                    <button
-                      className={`px-3 py-1 border rounded ${
-                        activeSize === index
-                          ? "bg-blue-600 text-white"
-                          : "bg-gray-100 text-gray-700"
-                      }`}
-                      onClick={() => handleSizeClick(index)}
-                    >
-                      {size}
-                    </button>
-                  </li>
+          {/* Actions Row */}
+          <div className="flex flex-wrap items-center space-y-4 sm:space-y-0 sm:space-x-4 mt-6 justify-start">
+            {/* Size Selector */}
+            {product.size && (
+              <div className="flex space-x-2">
+                {product.size.map((size, index) => (
+                  <button
+                    key={index}
+                    className={`px-3 py-1 text-sm sm:px-4 sm:py-2 border rounded-lg ${
+                      selectedSize === size
+                        ? "bg-blue-600 text-white"
+                        : "bg-white text-gray-600"
+                    }`}
+                    onClick={() => handleSizeChange(size)}
+                  >
+                    {size}
+                  </button>
                 ))}
-              </ul>
+              </div>
+            )}
+
+            {/* Weight Selector */}
+            {product.weight && (
+              <div className="flex space-x-2">
+                {product.weight.map((weight, index) => (
+                  <button
+                    key={index}
+                    className={`px-3 py-1 text-sm sm:px-4 sm:py-2 border rounded-lg ${
+                      selectedWeight === weight
+                        ? "bg-blue-600 text-white"
+                        : "bg-white text-gray-600"
+                    }`}
+                    onClick={() => handleWeightChange(weight)}
+                  >
+                    {weight}
+                  </button>
+                ))}
+              </div>
+            )}
+
+            {/* Quantity Selector */}
+            <div className="flex items-center border rounded-lg px-2 sm:px-4 py-1 sm:py-2">
+              <button
+                className="text-xl font-bold text-gray-700"
+                onClick={() => handleQuantityChange("decrement")}
+              >
+                -
+              </button>
+              <p className="mx-2 sm:mx-4 text-lg">{quantity}</p>
+              <button
+                className="text-xl font-bold text-gray-700"
+                onClick={() => handleQuantityChange("increment")}
+              >
+                +
+              </button>
             </div>
 
-            <div className="flex items-center mt-6 space-x-4 flex-wrap">
-              <QuantityBox />
+            {/* Wishlist Button */}
+            <button
+              className={`p-2 sm:p-3 rounded-full border ${
+                wishlist.includes(product.id)
+                  ? "text-red-600 border-red-600"
+                  : "text-gray-600 border-gray-300"
+              }`}
+              onClick={toggleWishlist}
+            >
+              <FiHeart size={20} sm:size={24} />
+            </button>
 
-              <Button className="flex items-center bg-blue-700 text-white py-2 px-4 rounded w-full sm:w-auto">
-                <BsCart4 className="mr-2" /> Add to Cart
-              </Button>
-
-              <Tooltip title="Add to wishlist" placement="top">
-                <Button className="text-gray-500 hover:text-blue-700 p-2">
-                  <FaRegHeart size={20} />
-                </Button>
-              </Tooltip>
-
-              <Tooltip title="Add to compare" placement="top">
-                <Button className="text-gray-500 hover:text-blue-700 p-2">
-                  <MdOutlineCompareArrows size={20} />
-                </Button>
-              </Tooltip>
-            </div>
+            {/* Add to Cart Button */}
+            <button
+              className="px-4 py-2 sm:px-6 sm:py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 flex items-center space-x-2"
+              onClick={handleAddToCart}
+            >
+              <FiShoppingCart size={16} sm:size={20} />
+              <span className="text-sm sm:text-base">Add to Cart</span>
+            </button>
           </div>
         </div>
-
-        <br />
-
-        <div className="mt-8 shadow-sm">
-          <ProductTabs />
-        </div>
-
-        <br />
-
-        <RelatedProduct title="RELATED PRODUCT" />
-
-        <RelatedProduct title="RECENTLY VIEWED PRODUCT" />
       </div>
-    </section>
+
+      <ProductTabs />
+
+      <RelatedProducts subCategory={product.subCategory} />
+
+      <RecentlyViewed />
+    </div>
   );
 };
 
-export default ProductDetails;
+export default ProductsDetails;

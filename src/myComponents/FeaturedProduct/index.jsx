@@ -3,7 +3,8 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/navigation";
 import { Navigation } from "swiper/modules";
-import ProductCard from "../../Share/FeaturedProductCard";
+import ProductCard from "../../Share/ProductCard";
+import { Link } from "react-router-dom";
 
 const FeaturedProduct = ({ products }) => (
   <div className="flex items-center justify-center bg-gray-100 py-8">
@@ -45,7 +46,13 @@ const FeaturedProduct = ({ products }) => (
           >
             {products.map((product, index) => (
               <SwiperSlide key={index}>
-                <ProductCard product={product} />
+                <Link
+                  to={`/product/${product._id}`}
+                  key={product._id}
+                  className="w-full block"
+                >
+                  <ProductCard product={product} />
+                </Link>
               </SwiperSlide>
             ))}
           </Swiper>
