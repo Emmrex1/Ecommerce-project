@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import ProductCard from "@/Share/ProductCard";
 
-
 const RecentlyViewed = () => {
   const [recentlyViewed, setRecentlyViewed] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -19,7 +18,12 @@ const RecentlyViewed = () => {
             "http://localhost:4000/api/products/recently-viewed",
             { productIds: storedRecentlyViewed }
           );
-          setRecentlyViewed(response.data);
+
+          if (response.data.success) {
+            setRecentlyViewed(response.data.products);
+          } else {
+            setError("Failed to load recently viewed products.");
+          }
         }
       } catch (err) {
         console.error("Error fetching recently viewed products:", err);
